@@ -26,7 +26,9 @@ function Character({ character, characterFavourites, updateFavourites }) {
         className="character-item__actions"
         onClick={() => toggleFavouriteForCharacter(character._id)}
       >
-        Add to Favourites
+        {!characterFavourites.includes(character._id)
+          ? "Add to Favourites"
+          : "Favourited"}
       </div>
 
       <img
