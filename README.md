@@ -43,6 +43,10 @@ You should then be able to access the application by opening the browser and vis
 
 [http://localhost:3000](http://localhost:3000)
 
+## Running Test
+
+npm test
+
 ## Let's get started
 
 Assuming you were able to start the application, let's move on to the [first activity](./docs/activity_1.md) and bring in the API call.
