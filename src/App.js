@@ -7,8 +7,8 @@ import axios from "axios";
 
 function App() {
   const [characters, setCharacters] = useState([]);
-
   const [currentPage, setCurrentPage] = useState(1);
+  const [characterFavourites, setCharacterFavourites] = useState([]);
 
   const getCharacters = async (pageNumber) => {
     const apiResponse = await axios.get(
@@ -20,13 +20,14 @@ function App() {
   useEffect(() => {
     getCharacters(currentPage);
   }, [currentPage]);
-  
 
   return (
     <div className="page">
       <Header currentPage={currentPage} />
       <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
-      <CharacterContainer characters={characters} />
+      <CharacterContainer characters={characters} 
+                    characterFavourites={characterFavourites} 
+                    updateFavourites={setCharacterFavourites}  />
     </div>
   );
 }
