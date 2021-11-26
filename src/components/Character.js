@@ -3,7 +3,6 @@ import { FavouritesContext } from '../App';
 
 function Character({ character }) {
 
-  // const characterFavourites = useContext(FavouritesContext);
   const { characterFavourites, setCharacterFavourites } = useContext(FavouritesContext);
 
   let imageSrc = "https://picsum.photos/300/200/?blur";
@@ -14,13 +13,17 @@ function Character({ character }) {
     );
   }
 
-  function toggleFavouriteForCharacter(characterId) {
-    if (!characterFavourites.includes(characterId)) {
-      setCharacterFavourites([...characterFavourites, characterId]);
+  function toggleFavouriteForCharacter(characterId, characterName, characterImageUrl ) {
+    const newFavourtite = {
+      _id: characterId,
+      name: characterName,
+      imageUrl: characterImageUrl,
+    }
+    
+    if (!characterFavourites.some(item => item._id === newFavourtite._id )) {
+      setCharacterFavourites([...characterFavourites, newFavourtite]);
     } else {
-      const updatedFavourites = characterFavourites.filter(
-        (id) => id !== characterId
-      );
+      const updatedFavourites = characterFavourites.filter((id) => id._id !== newFavourtite._id );
       setCharacterFavourites(updatedFavourites);
     }
   }
@@ -31,11 +34,13 @@ function Character({ character }) {
 
       <div
         className="character-item__actions"
-        onClick={() => toggleFavouriteForCharacter(character._id)}
+        onClick={() => toggleFavouriteForCharacter(character._id, character.name, character.imageUrl)}
       >
-        {!characterFavourites.includes(character._id)
+        {
+        !characterFavourites.some(item => item._id === character._id )
           ? "Add to Favourites"
-          : "Favourited"}
+          : "Favourited"
+        }
       </div>
 
       <img
